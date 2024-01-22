@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.math.*;
 
-
+//hej
 
 public abstract class Car implements Movable {
     protected int nrDoors; // Number of doors on the car
