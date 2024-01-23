@@ -13,8 +13,5 @@ public class Volvo240 extends Car {
         return enginePower * 0.01 * trimFactor;
     }
 
-    public static void main(String[] args) {
-        Volvo240 volvo = new Volvo240();
 
-    }
 }
