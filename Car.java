@@ -68,13 +68,25 @@ public abstract class Car implements Movable {
     // tog bort ifrån saab och volvo pga båda skall ha det. Pga vilkoret att det endast skall acceptera
     //värden mellan 0 och 1 så la jag in if-satsen.
     public void gas(double amount) {
-        if (amount >= 0 && amount <= 1) {
-            incrementSpeed(amount);
+        try {if (amount >= 0 && amount <= 1) {
+                incrementSpeed(amount);
+            }
+            else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            System.out.println("Choose a number between 0 and 1");
         }
     }
     public void brake(double amount) {
-        if (amount >= 0 && amount <= 1) {
-            decrementSpeed(amount);
+        try {
+            if (amount >= 0 && amount <= 1) {
+                decrementSpeed(amount);
+            }
+            else {
+                throw new Exception();}
+        } catch (Exception e) {
+            System.out.println("Choose a number between 0 and 1");
         }
     }
 
