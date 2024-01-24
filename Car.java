@@ -97,12 +97,12 @@ public abstract class Car implements Movable {
     }
     @Override
     public void turnLeft() {
-        direction += 90;
+        direction = (direction+90)%360;
     }
 
     @Override
     public void turnRight() {
-        direction -= 90;
+        direction = (direction-90)%360;
     }
 
 }
