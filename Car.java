@@ -1,23 +1,23 @@
 import java.awt.*;
 
 public abstract class Car implements Movable {
-    protected int nrDoors; // Number of doors on the car
-    protected double enginePower; // Engine power of the car
-    protected double currentSpeed; // The current speed of the car
-    protected Color color; // Color of the car
-    protected String modelName; // The car model name
-    protected double xpos; // x-pos of car
-    protected double ypos; // y-pos of car
-    protected double direction; // direction of car
+    private int nrDoors; // Number of doors on the car
+    private double enginePower; // Engine power of the car
+    private double currentSpeed; // The current speed of the car
+    private Color color; // Color of the car
+    private String modelName; // The car model name
+    private double xpos; // x-pos of car
+    private double ypos; // y-pos of car
+    private double direction; // direction of car
 
     public Car(int nrDoors, Color color, double enginePower, String modelName) {
-        this.xpos = 0;
-        this.ypos = 0;
-        this.direction = 0;
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
+        this.xpos = 0;
+        this.ypos = 1;
+        this.direction = 90;
         stopEngine();
 
     }
@@ -40,6 +40,11 @@ public abstract class Car implements Movable {
         this.color = clr;
     }
 
+    protected double getXpos(){return this.xpos;}
+    protected double getYpos(){return this.ypos;}
+
+    protected double getDirection(){return this.direction;}
+
     protected void startEngine(){
         this.currentSpeed = 0.1;
     }
@@ -49,15 +54,8 @@ public abstract class Car implements Movable {
     }
 
 
-    //ska speedfactor, inctement/decrement speed? vara med i och med att båda klasserna har det?
-
-    //fixade med hjälp av att göra abstract och protected och override i de andra klasserna.
-    //Abstract för att denna metod måste implementeras i subklassen.
     protected abstract double speedFactor();
 
-    // Detta minimeraar kodduplicering och säkerställer att currentSpeed alltid ligger i intervallet
-    // [0, enginePower] enl. uppg4. Void pga superklassen kan ge en generell implementation
-    // som passar alla subklasser
     protected void incrementSpeed(double amount){
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
@@ -65,8 +63,6 @@ public abstract class Car implements Movable {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
-    // tog bort ifrån saab och volvo pga båda skall ha det. Pga vilkoret att det endast skall acceptera
-    //värden mellan 0 och 1 så la jag in if-satsen.
     public void gas(double amount) {
         try {if (amount >= 0 && amount <= 1) {
                 incrementSpeed(amount);
