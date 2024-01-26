@@ -3,6 +3,7 @@ import org.junit.Test;
 import java.awt.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class testVolvo240 {
 
@@ -44,6 +45,28 @@ public class testVolvo240 {
         car.gas(1);
         car.brake(0.5);
         assertEquals(0.725,car.getCurrentSpeed(),0.001);
+    }
+
+    //Test för att fånga felmeddelande
+    @Test
+    public void testgaswrongamount(){
+        Car car = new Volvo240();
+        car.startEngine();
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> {
+            car.gas(5);
+        });
+        assertEquals("The number is not valid. Please choose a value between 0 and 1", e.getMessage());
+    }
+
+    //Test för att fånga felmeddelande
+    @Test
+    public void testbrakewrongamount(){
+        Car car = new Volvo240();
+        car.startEngine();
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> {
+            car.brake(5);
+        });
+        assertEquals("The number is not valid. Please choose a value between 0 and 1", e.getMessage());
     }
 
     @Test

@@ -41,6 +41,7 @@ public abstract class Car implements Movable {
     }
 
     protected double getXpos(){return this.xpos;}
+
     protected double getYpos(){return this.ypos;}
 
     protected double getDirection(){return this.direction;}
@@ -53,36 +54,35 @@ public abstract class Car implements Movable {
         this.currentSpeed = 0;
     }
 
-
     protected abstract double speedFactor();
 
-    protected void incrementSpeed(double amount){
+    // Ändrat till private
+    private void incrementSpeed(double amount){
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
-    protected void decrementSpeed(double amount){
+
+    // Ändrat till private
+    private void decrementSpeed(double amount){
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
+    //Här är det ändrat till IllegalArgumentException
     public void gas(double amount) {
-        try {if (amount >= 0 && amount <= 1) {
-                incrementSpeed(amount);
-            }
-            else {
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            System.out.println("Choose a number between 0 and 1");
+        if (amount >= 0 && amount <= 1) {
+            incrementSpeed(amount);
+        }
+        else {
+            throw new IllegalArgumentException("The number is not valid. Please choose a value between 0 and 1");
         }
     }
+
+    //Här är det ändrat till IllegalArgumentException
     public void brake(double amount) {
-        try {
-            if (amount >= 0 && amount <= 1) {
-                decrementSpeed(amount);
-            }
-            else {
-                throw new Exception();}
-        } catch (Exception e) {
-            System.out.println("Choose a number between 0 and 1");
+        if (amount >= 0 && amount <= 1) {
+            decrementSpeed(amount);
+        }
+        else {
+            throw new IllegalArgumentException("The number is not valid. Please choose a value between 0 and 1");
         }
     }
 
